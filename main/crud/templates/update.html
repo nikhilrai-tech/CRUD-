@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+<div class="container text-center mt-5 text-bg-warning p-3">
+    <h2>Update Student Record</h2>
+</div>
+<div class="container">
+    <div class="row mt-5 ">
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Update" class="btn btn-outline-success mt-5" style="width:100%">
+</form>
+    </div>
+</div>
+{% endblock head %}

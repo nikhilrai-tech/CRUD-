@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+    {% block head %}
+    <div class="container text-center mt-5 text-bg-info p-3">
+        <h2>CRUD using Base class based view</h2>
+    </div>
+    {% endblock head %}
+    {% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-sm-4 mt-4">
+                <h2 class="text-bg-success p-3 text-center ">Add new Student</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                {% for form in fm %}
+                {{form.label_tag}}{{form}}{{form.errors|striptags}}
+                {% endfor %}
+                <input type="Submit" value="Submit" class="btn btn-outline-primary mt-5" style="width:100%">
+                </form>
+            </div>
+            <div class="col-6 col-sm-8 mt-4">
+                <h2 class="text-bg-success p-3 text-center text-white">Show Student Information</h2>
+                {% if user %}
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col" >ID</th>
+                        <th scope="col" >Name</th>
+                        <th scope="col" >Email</th>
+                        <th scope="col" >Password</th>
+                        <th scope="col" >Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in user %}
+                        <tr>
+                            <th scope="row">{{user.id}}</th>
+                            <td>{{user.name}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.password}}</td>
+                            <td>
+                                <a href="{% url "update" user.id %}" class=" btn btn-outline-warning mb-3 btn-sm ">Update</a>
+                                <form action="{% url "delete" user.id%}" method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Delete" class="btn btn-outline-danger btn-sm">
+                                </form>
+                            </td>
+                          </tr>
+                        {% endfor %}   
+                    </tbody>
+                  </table>
+                  {% else %}
+                <h2 class="alert alert-warning text-center" role="alert" >No Record</h2>
+                  {% endif %}
+            </div>
+        </div>
+    </div> 
+    {% endblock body %}
+</body>
+</html>
