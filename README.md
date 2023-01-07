@@ -1,2 +1,2 @@
-# CRUD-
+# django CRUD operation-
 using class based
